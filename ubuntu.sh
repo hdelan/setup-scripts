@@ -18,7 +18,7 @@ git config --global user.name "Hugh Delaney"
 sudo snap install node --classic
 
 # Neovim stuff
-python3 -m pip install pynvim
+python3 -m pip install pynvim pss
 
 # Vim-plug for Neovim
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
