@@ -31,3 +31,5 @@ sh cuda_11.7.1_515.65.01_linux.run
 
 # Ohmyzsh
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+git clone https://github.com/hdelan/llvm.git
