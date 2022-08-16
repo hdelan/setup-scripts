@@ -16,7 +16,6 @@ apt install git \
   zsh \
   build-essential \
   openssh-server \
-  nodejs \
   ccache \
   curl \
   wget \
