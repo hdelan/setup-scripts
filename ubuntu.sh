@@ -19,21 +19,29 @@ apt install git \
   ccache \
   curl \
   wget \
-  neovim \
   cmake \
   ninja-build \
   python3-distutils \
   htop -y
 
+NVIM=nvim-linux64
+if [[ ! -e $HOME/.local/$NVIM ]]
+then
+  wget https://github.com/neovim/neovim/releases/download/v0.7.2/$NVIM.tar.gz
+  tar -xf $NVIM.tar.gz
+  mv $NVIM .local
+  rm $NVIM.tar.gz
+fi
+
 git config --global user.email "hugh.delaney@codeplay.com"
 git config --global user.name "Hugh Delaney"
 
 NODE=node-v16.17.0-linux-x64
-if [[ $(command -v node | wc -l) -eq 0 ]]
+if [[ ! -e $HOME/.local/$NODE ]]
 then
   wget https://nodejs.org/dist/v16.17.0/$NODE.tar.xz
   tar -xf $NODE.tar.xz
-  mv $NODE .config
+  mv $NODE .local
 fi
 
 snap install code --classic
@@ -66,10 +74,11 @@ then
   dpkg -i cuda-keyring_1.0-1_all.deb
   apt-get update
   apt-get -y install cuda
+  rm cuda-keyring_1.0-1_all.deb
 fi
 
 # Ohmyzsh
-if [[ ! -e $HOME/.oh-my-zsh ]]
+if [[ ! -e $HOME/.oh-my-zsh || ! -e $HOME/.zshrc ]]
 then
   sudo -u hugh sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
@@ -79,8 +88,8 @@ then
   sudo -u hugh git clone https://github.com/hdelan/llvm.git
 fi
 
-if [[ ! $(tail $HOME/.zshrc | grep "llvm/build/bin" | wc -l) -eq 0 ]]
+if [[ $(tail $HOME/.zshrc | grep "llvm/build/bin" | wc -l) -eq 0 ]]
 then
-  sudo -u hugh echo "export PATH=$HOME/llvm/build/bin:$HOME/.local/bin:$HOME/.config/$NODE/bin:/usr/local/cuda-11.7/bin:$PATH" >> $HOME/.zshrc
+  sudo -u hugh echo "export PATH=$HOME/llvm/build/bin:$HOME/.local/bin:$HOME/.local/$NODE/bin::$HOME/.local/$NVIM/bin:/usr/local/cuda-11.7/bin:$PATH" >> $HOME/.zshrc
   sudo -u hugh echo "export LD_LIBRARY_PATH=$HOME/llvm/build/lib:/usr/local/cuda-11.7/lib64:$LD_LIBRARY_PATH" >> $HOME/.zshrc
 fi
