@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ "$EUID" -ne 0 ]
 then echo "This setup script must be run as root."
   exit
