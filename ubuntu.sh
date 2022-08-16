@@ -10,7 +10,7 @@ cd
 HOME=$(pwd)
 
 apt update && apt upgrade -y
-apt install git zsh build-essential nodejs curl wget neovim cmake ninja-build -y
+apt install git zsh build-essential openssh-server nodejs curl wget neovim cmake ninja-build -y
 
 git config --global user.email "hugh.delaney@codeplay.com"
 git config --global user.name "Hugh Delaney"
