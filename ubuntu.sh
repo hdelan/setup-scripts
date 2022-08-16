@@ -12,6 +12,9 @@ HOME=$(pwd)
 apt update && apt upgrade -y
 apt install git zsh build-essential nodejs curl wget neovim cmake ninja-build -y
 
+git config --global user.email "hugh.delaney@codeplay.com"
+git config --global user.name "Hugh Delaney"
+
 sudo snap install node --classic
 
 # Neovim stuff
